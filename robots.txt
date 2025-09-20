@@ -1,0 +1,4 @@
+# All robots are welcome!
+User-agent: *
+Disallow:
+Sitemap: https://mcmodding.dev/sitemap.xml

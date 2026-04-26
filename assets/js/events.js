@@ -584,11 +584,10 @@
         let totalVisible = 0;
 
         groups.forEach(group => {
-            const rows = group.querySelectorAll('tbody tr');
+            const rows = group.querySelectorAll('tbody tr:not(.desc-row)');
             let visible = 0;
 
             rows.forEach(tr => {
-                if (tr.classList.contains('desc-row')) return;
                 const match = !state.searchQuery || tr.dataset.search.includes(state.searchQuery);
                 tr.classList.toggle('row-hidden', !match);
                 const descTr = tr.nextElementSibling;
@@ -603,9 +602,10 @@
 
             const countEl = group.querySelector('.group-count');
             if (countEl) {
+                const totalRows = rows.length;
                 countEl.textContent = state.searchQuery
-                    ? `${visible} / ${rows.length} events`
-                    : `${rows.length} events`;
+                    ? `${visible} / ${totalRows} events`
+                    : `${totalRows} events`;
             }
         });
 
@@ -617,8 +617,8 @@
     }
 
     function updateStatusBar() {
-        const total = dom.content.querySelectorAll('tbody tr').length;
-        const visible = dom.content.querySelectorAll('tbody tr:not(.row-hidden)').length;
+        const total = dom.content.querySelectorAll('tbody tr:not(.desc-row)').length;
+        const visible = dom.content.querySelectorAll('tbody tr:not(.desc-row):not(.row-hidden)').length;
         const json = state.currentData;
 
         let datePart = '';

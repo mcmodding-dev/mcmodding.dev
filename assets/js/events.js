@@ -110,7 +110,7 @@
 
     async function loadBranches(loader) {
         if (state.branches[loader]) return state.branches[loader];
-        const data = await fetchJson(`${BASE_URL}/${loader}/branches.json`);
+        const data = await fetchJson(`${BASE_URL}/${loader}/branches.min.json`);
         const list = Array.isArray(data.branches) ? data.branches : [];
         list.sort((a, b) => semverCompare(b, a));
         state.branches[loader] = list;
@@ -124,7 +124,7 @@
         dom.versionSelect.disabled = true;
 
         try {
-            const data = await fetchJson(`${BASE_URL}/${loader}/${version}.json`);
+            const data = await fetchJson(`${BASE_URL}/${loader}/${version}.min.json`);
             state.currentData = data;
 
             if (loader === 'fabric') {

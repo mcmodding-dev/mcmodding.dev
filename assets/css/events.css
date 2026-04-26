@@ -505,6 +505,18 @@ tr.row-expanded td.col-pkg {
     border-color: rgba(200, 160, 80, 0.3);
 }
 
+.ev-desc {
+    display: none;
+    margin-top: 4px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+tr.row-expanded .ev-desc {
+    display: block;
+}
+
 .desc-row {
     display: none;
 }

@@ -313,10 +313,17 @@
                     const descTr = document.createElement('tr');
                     descTr.className = 'desc-row desc-row-hidden';
                     descTr.dataset.search = tr.dataset.search;
-                    descTr.innerHTML = `
-                        <td></td>
-                        <td colspan="6" class="col-desc">${escapeHtml(ev.description)}</td>
-                        <td></td>`;
+
+                    const descEmpty1 = document.createElement('td');
+                    const descTd = document.createElement('td');
+                    descTd.className = 'col-desc';
+                    descTd.colSpan = 6;
+                    descTd.textContent = ev.description;
+                    const descEmpty2 = document.createElement('td');
+
+                    descTr.appendChild(descEmpty1);
+                    descTr.appendChild(descTd);
+                    descTr.appendChild(descEmpty2);
 
                     tr.classList.add('has-desc');
                     tr.addEventListener('click', e => {
@@ -469,7 +476,6 @@
                     badges.push(`<span class="ev-badge ev-badge-side ev-badge-side-${escapeHtml(ev.side)}">${escapeHtml(ev.side)}</span>`);
                 }
                 const badgeHtml = badges.length ? `<span class="ev-badges">${badges.join('')}</span>` : '';
-                const descHtml = ev.description ? `<div class="ev-desc">${escapeHtml(ev.description)}</div>` : '';
 
                 let fieldsTd = '<td class="col-fields">';
                 let visibleFieldCount = 0;
@@ -496,17 +502,47 @@
 
                 tr.innerHTML = `
                     <td class="col-chevron">${hasContent ? `<span class="ev-expand-icon">${ICON_CHEVRON}</span>` : ''}</td>
-                    <td><div class="ev-name-row"><span class="ev-name">${escapeHtml(ev.event || '')}</span>${badgeHtml}</div>${descHtml}</td>
+                    <td><div class="ev-name-row"><span class="ev-name">${escapeHtml(ev.event || '')}</span>${badgeHtml}</div></td>
                     ${fieldsTd}
                     <td class="col-link"><a href="${escapeHtml(ev.url || '#')}" target="_blank" rel="noopener noreferrer" title="View source" aria-label="View source">${ICON_EXTERNAL}</a></td>
                     <td class="col-copy"></td>`;
 
-                if (hasContent) {
+                if (ev.description) {
+                    const descTr = document.createElement('tr');
+                    descTr.className = 'desc-row desc-row-hidden';
+                    descTr.dataset.search = tr.dataset.search;
+
+                    const descEmpty1 = document.createElement('td');
+                    const descTd = document.createElement('td');
+                    descTd.className = 'col-desc';
+                    descTd.colSpan = 2;
+                    descTd.textContent = ev.description;
+                    const descEmpty2 = document.createElement('td');
+                    const descEmpty3 = document.createElement('td');
+
+                    descTr.appendChild(descEmpty1);
+                    descTr.appendChild(descTd);
+                    descTr.appendChild(descEmpty2);
+                    descTr.appendChild(descEmpty3);
+
+                    tr.classList.add('has-desc');
+                    tr.addEventListener('click', e => {
+                        if (e.target.closest('a, button')) return;
+                        const expanded = tr.classList.toggle('row-expanded');
+                        descTr.classList.toggle('desc-row-hidden', !expanded);
+                    });
+
+                    tbody.appendChild(tr);
+                    tbody.appendChild(descTr);
+                } else if (hasContent) {
                     tr.classList.add('has-desc');
                     tr.addEventListener('click', e => {
                         if (e.target.closest('a, button')) return;
                         tr.classList.toggle('row-expanded');
                     });
+                    tbody.appendChild(tr);
+                } else {
+                    tbody.appendChild(tr);
                 }
 
                 const sourceLink = tr.querySelector('.col-link a');
@@ -525,10 +561,8 @@
                     copyToClipboard(copyBtn, buildForgeSnippet(ev), { loader: loader, event: ev.event || '' });
                 });
                 tr.querySelector('.col-copy').appendChild(copyBtn);
-
-                tbody.appendChild(tr);
             });
-
+            
             table.appendChild(tbody);
             body.appendChild(table);
             dom.content.appendChild(group);

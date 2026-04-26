@@ -218,7 +218,7 @@
     margin-top: 16px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    overflow: hidden;
+    overflow: visible;
 }
 
 .module-group.all-hidden {
@@ -239,6 +239,7 @@
     user-select: none;
     gap: 12px;
     transition: background 0.15s;
+    border-radius: var(--radius) var(--radius) 0 0;
 }
 
 .module-group-header:hover {
@@ -278,6 +279,9 @@
 
 .module-group-body {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0 0 var(--radius) var(--radius);
+    max-width: 100%;
 }
 
 .module-group.collapsed .module-group-body {
@@ -290,6 +294,7 @@
     border-collapse: collapse;
     font-size: 0.855rem;
     table-layout: fixed;
+    max-width: 100%;
 }
 
 .events-table th {
@@ -334,13 +339,33 @@
     font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--text-code);
-    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
 }
 
 .col-pkg {
     color: var(--text-secondary);
     font-size: 0.78rem;
-    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+tr.row-expanded td.col-func {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    max-width: none;
+}
+
+tr.row-expanded td.col-pkg {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    max-width: none;
 }
 
 .col-link {
@@ -415,7 +440,8 @@
     font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--text-code);
-    word-break: break-word;
+    word-break: normal;
+    white-space: nowrap;
 }
 
 .ev-badges {
@@ -600,5 +626,11 @@ tr.row-expanded .ev-expand-icon {
     .tab-btn {
         padding: 8px 12px;
         font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 1240px) {
+    .events-table {
+        min-width: 1200px;
     }
 }

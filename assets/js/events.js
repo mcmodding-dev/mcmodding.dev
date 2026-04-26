@@ -15,11 +15,11 @@
     const dom = {};
 
     /*Icons (Lucide — MIT) */
-    const ICON_CHEVRON  = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
-    const ICON_COPY     = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>';
-    const ICON_CHECK    = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+    const ICON_CHEVRON = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
+    const ICON_COPY = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>';
+    const ICON_CHECK = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
     const ICON_EXTERNAL = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>';
-    const ICON_RESET    = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>';
+    const ICON_RESET = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>';
 
     function escapeHtml(str) {
         return String(str == null ? '' : str)
@@ -47,13 +47,13 @@
 
     function buildFabricSnippet(ev) {
         const className = (ev.file || '').replace(/\.java$/i, '');
-        const variable  = ev.variable || '';
-        const funcSig   = ev.function || '';
+        const variable = ev.variable || '';
+        const funcSig = ev.function || '';
 
         const paramMatch = funcSig.match(/\(([^)]*)\)/);
-        const params     = paramMatch ? paramMatch[1].trim() : '';
+        const params = paramMatch ? paramMatch[1].trim() : '';
         const returnType = (funcSig.match(/^(\S+)\s+\w/) || [])[1] || '';
-        const body       = returnType === 'boolean' ? 'return true;' : '// TODO';
+        const body = returnType === 'boolean' ? 'return true;' : '// TODO';
 
         const lambda = params ? `(${params})` : '()';
         return `${className}.${variable}.register(${lambda} -> {\n\t${body}\n});`;
@@ -61,8 +61,8 @@
 
     function buildForgeSnippet(ev) {
         const eventClass = ev.event || '';
-        const segments   = eventClass.split('.');
-        const stripped   = segments.map(s => s.replace(/Event$/, '')).join('');
+        const segments = eventClass.split('.');
+        const stripped = segments.map(s => s.replace(/Event$/, '')).join('');
         const methodName = 'on' + stripped.charAt(0).toUpperCase() + stripped.slice(1);
         return `@SubscribeEvent\npublic static void ${methodName}(${eventClass} e) {\n\t// TODO\n}`;
     }
@@ -89,7 +89,7 @@
             data.loader = state.activeLoader;
             if (!data[state.activeLoader]) data[state.activeLoader] = {};
             data[state.activeLoader].version = state.activeVersion;
-            data[state.activeLoader].search  = state.searchQuery;
+            data[state.activeLoader].search = state.searchQuery;
             localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
         } catch (_) {}
     }
@@ -252,9 +252,10 @@
             table.innerHTML = `
                 <colgroup>
                     <col style="width:32px">
-                    <col style="width:20%">
+                    <col style="width:18%">
                     <col style="width:16%">
-                    <col style="width:19%">
+                    <col style="width:16%">
+                    <col style="width:18%">
                     <col style="width:auto">
                     <col style="width:80px">
                     <col style="width:80px">
@@ -262,6 +263,7 @@
                 <thead>
                     <tr>
                         <th></th>
+                        <th>Class</th>
                         <th>Interface</th>
                         <th>Variable</th>
                         <th>Package</th>
@@ -277,11 +279,11 @@
                 const tr = document.createElement('tr');
                 tr.dataset.search = [
                     moduleName,
-                    ev.interface || '',
-                    ev.variable  || '',
-                    ev.function  || '',
-                    ev.package   || '',
-                    ev.file      || ''
+                    ev['interface'] || '',
+                    ev.variable || '',
+                    ev.function || '',
+                    ev.package || '',
+                    ev.file || ''
                 ].join(' ').toLowerCase();
 
                 const badges = [];
@@ -292,29 +294,47 @@
                     badges.push(`<span class="ev-badge ev-badge-side ev-badge-side-${escapeHtml(ev.side)}">${escapeHtml(ev.side)}</span>`);
                 }
                 const badgeHtml = badges.length ? `<span class="ev-badges">${badges.join('')}</span>` : '';
-                const descHtml  = ev.description ? `<div class="ev-desc">${escapeHtml(ev.description)}</div>` : '';
+
+                const className = (ev.file || '').replace(/\.java$/i, '');
+                const classDisplay = escapeHtml(className);
+                const interfaceDisplay = (ev['interface'] || '') === className ? '″' : escapeHtml(ev['interface'] || '');
 
                 tr.innerHTML = `
                     <td class="col-chevron">${ev.description ? `<span class="ev-expand-icon">${ICON_CHEVRON}</span>` : ''}</td>
-                    <td><div class="ev-name-row"><span>${escapeHtml(ev.interface || '')}</span>${badgeHtml}</div>${descHtml}</td>
-                    <td>${escapeHtml(ev.variable  || '')}</td>
+                    <td class="col-class">${classDisplay}</td>
+                    <td><div class="ev-name-row"><span>${interfaceDisplay}</span>${badgeHtml}</div></td>
+                    <td>${escapeHtml(ev.variable || '')}</td>
                     <td class="col-pkg">${escapeHtml(ev.package || '')}</td>
                     <td class="col-func">${escapeHtml(ev.function || '')}</td>
                     <td class="col-link"><a href="${escapeHtml(ev.url || '#')}" target="_blank" rel="noopener noreferrer" title="View source" aria-label="View source">${ICON_EXTERNAL}</a></td>
                     <td class="col-copy"></td>`;
 
                 if (ev.description) {
+                    const descTr = document.createElement('tr');
+                    descTr.className = 'desc-row desc-row-hidden';
+                    descTr.dataset.search = tr.dataset.search;
+                    descTr.innerHTML = `
+                        <td></td>
+                        <td colspan="6" class="col-desc">${escapeHtml(ev.description)}</td>
+                        <td></td>`;
+
                     tr.classList.add('has-desc');
                     tr.addEventListener('click', e => {
                         if (e.target.closest('a, button')) return;
-                        tr.classList.toggle('row-expanded');
+                        const expanded = tr.classList.toggle('row-expanded');
+                        descTr.classList.toggle('desc-row-hidden', !expanded);
                     });
+
+                    tbody.appendChild(tr);
+                    tbody.appendChild(descTr);
+                } else {
+                    tbody.appendChild(tr);
                 }
 
                 const sourceLink = tr.querySelector('.col-link a');
                 if (sourceLink) {
                     sourceLink.addEventListener('click', () => {
-                        _qa('source_click', { loader: 'fabric', module: moduleName, event: (ev.file || '').replace(/\.java$/i, '') + '.' + (ev.variable || '') });
+                        _qa('source_click', { loader: 'fabric', module: moduleName, event: className + '.' + (ev.variable || '') });
                     });
                 }
 
@@ -324,11 +344,9 @@
                 copyBtn.setAttribute('title', 'Copy code snippet');
                 copyBtn.setAttribute('aria-label', 'Copy code snippet');
                 copyBtn.addEventListener('click', () => {
-                    copyToClipboard(copyBtn, buildFabricSnippet(ev), { loader: 'fabric', module: moduleName, event: (ev.file || '').replace(/\.java$/i, '') + '.' + (ev.variable || '') });
+                    copyToClipboard(copyBtn, buildFabricSnippet(ev), { loader: 'fabric', module: moduleName, event: className + '.' + (ev.variable || '') });
                 });
                 tr.querySelector('.col-copy').appendChild(copyBtn);
-
-                tbody.appendChild(tr);
             });
 
             table.appendChild(tbody);
@@ -343,51 +361,60 @@
         const allTables = dom.content.querySelectorAll('.events-table');
         if (!allTables.length) return;
 
-        const firstTd = dom.content.querySelector('.events-table tbody td');
+        const firstTd = dom.content.querySelector('.events-table tbody td:nth-child(2)');
         if (!firstTd) return;
         const cs = getComputedStyle(firstTd);
 
         const probe = document.createElement('span');
         probe.style.cssText = 'position:absolute;left:-9999px;top:-9999px;visibility:hidden;white-space:nowrap;';
-        probe.style.fontSize   = cs.fontSize   || '0.855rem';
+        probe.style.fontSize = cs.fontSize || '0.855rem';
         probe.style.fontFamily = cs.fontFamily || 'system-ui, sans-serif';
         probe.style.fontWeight = cs.fontWeight || '400';
         document.body.appendChild(probe);
 
-        let maxTextPx = 0;
+        let maxClassPx = 0;
         dom.content.querySelectorAll('.events-table tbody td:nth-child(2)').forEach(td => {
             probe.textContent = td.textContent.trim();
-            maxTextPx = Math.max(maxTextPx, probe.getBoundingClientRect().width);
+            maxClassPx = Math.max(maxClassPx, probe.getBoundingClientRect().width);
+        });
+
+        let maxInterfacePx = 0;
+        dom.content.querySelectorAll('.events-table tbody td:nth-child(3)').forEach(td => {
+            const text = td.textContent.trim();
+            if (text === '″') return;
+            probe.textContent = text;
+            maxInterfacePx = Math.max(maxInterfacePx, probe.getBoundingClientRect().width);
         });
         probe.remove();
 
-        if (!maxTextPx) return;
+        if (!maxClassPx && !maxInterfacePx) return;
 
-        const tdPadding  = 24;
+        const tdPadding = 24;
         const tableWidth = allTables[0].offsetWidth;
         if (!tableWidth) return;
 
-        const neededPct = Math.max(20, Math.ceil(((maxTextPx * 1.07 + tdPadding) / tableWidth) * 100));
-        if (neededPct <= 20) return;
+        const classPct = Math.max(14, Math.ceil(((maxClassPx * 1.1 + tdPadding + 10) / tableWidth) * 100));
+        const interfacePct = Math.max(14, Math.ceil(((maxInterfacePx * 1.07 + tdPadding) / tableWidth) * 100));
 
-        const fixedPx       = 192;
-        const flexPoolPct   = Math.floor((tableWidth - fixedPx) / tableWidth * 100);
-        const flexRemaining = flexPoolPct - neededPct;
+        const fixedPx = 192;
+        const flexPoolPct = Math.floor((tableWidth - fixedPx) / tableWidth * 100);
+        const flexRemaining = flexPoolPct - classPct - interfacePct;
         if (flexRemaining < 20) return;
 
         const funcBase = flexPoolPct - 55;
-        const parts    = 16 + 19 + funcBase;
-        const varPct   = Math.round((16 / parts) * flexRemaining);
-        const pkgPct   = Math.round((19 / parts) * flexRemaining);
-        const funcPct  = flexRemaining - varPct - pkgPct;
+        const parts = 16 + 19 + funcBase;
+        const varPct = Math.round((16 / parts) * flexRemaining);
+        const pkgPct = Math.round((19 / parts) * flexRemaining);
+        const funcPct = flexRemaining - varPct - pkgPct;
 
         allTables.forEach(table => {
             const cols = table.querySelectorAll('col');
-            if (cols.length >= 5) {
-                cols[1].style.width = neededPct + '%';
-                cols[2].style.width = varPct + '%';
-                cols[3].style.width = pkgPct + '%';
-                cols[4].style.width = funcPct + '%';
+            if (cols.length >= 6) {
+                cols[1].style.width = classPct + '%';
+                cols[2].style.width = interfacePct + '%';
+                cols[3].style.width = varPct + '%';
+                cols[4].style.width = pkgPct + '%';
+                cols[5].style.width = funcPct + '%';
             }
         });
     }
@@ -442,7 +469,7 @@
                     badges.push(`<span class="ev-badge ev-badge-side ev-badge-side-${escapeHtml(ev.side)}">${escapeHtml(ev.side)}</span>`);
                 }
                 const badgeHtml = badges.length ? `<span class="ev-badges">${badges.join('')}</span>` : '';
-                const descHtml  = ev.description ? `<div class="ev-desc">${escapeHtml(ev.description)}</div>` : '';
+                const descHtml = ev.description ? `<div class="ev-desc">${escapeHtml(ev.description)}</div>` : '';
 
                 let fieldsTd = '<td class="col-fields">';
                 let visibleFieldCount = 0;
@@ -519,8 +546,13 @@
             let visible = 0;
 
             rows.forEach(tr => {
+                if (tr.classList.contains('desc-row')) return;
                 const match = !state.searchQuery || tr.dataset.search.includes(state.searchQuery);
                 tr.classList.toggle('row-hidden', !match);
+                const descTr = tr.nextElementSibling;
+                if (descTr && descTr.classList.contains('desc-row')) {
+                    descTr.classList.toggle('row-hidden', !match);
+                }
                 if (match) visible++;
             });
 
@@ -543,9 +575,9 @@
     }
 
     function updateStatusBar() {
-        const total   = dom.content.querySelectorAll('tbody tr').length;
+        const total = dom.content.querySelectorAll('tbody tr').length;
         const visible = dom.content.querySelectorAll('tbody tr:not(.row-hidden)').length;
-        const json    = state.currentData;
+        const json = state.currentData;
 
         let datePart = '';
         if (json && json.lastupdated) {
@@ -559,8 +591,8 @@
     }
 
     function toggleGroup(e) {
-        const header   = e.currentTarget;
-        const group    = header.closest('.module-group');
+        const header = e.currentTarget;
+        const group = header.closest('.module-group');
         const expanded = header.getAttribute('aria-expanded') === 'true';
         header.setAttribute('aria-expanded', String(!expanded));
         group.classList.toggle('collapsed', expanded);
@@ -611,17 +643,17 @@
     }
 
     async function init() {
-        dom.tabBtns       = document.querySelectorAll('.tab-btn');
+        dom.tabBtns = document.querySelectorAll('.tab-btn');
         dom.versionSelect = document.getElementById('version-select');
-        dom.search        = document.getElementById('search-input');
-        dom.filterReset   = document.getElementById('filter-reset');
+        dom.search = document.getElementById('search-input');
+        dom.filterReset = document.getElementById('filter-reset');
         dom.filterReset.innerHTML = ICON_RESET;
-        dom.content       = document.getElementById('events-content');
-        dom.status        = document.getElementById('events-status');
+        dom.content = document.getElementById('events-content');
+        dom.status = document.getElementById('events-status');
 
         bindEvents();
 
-        const saved  = loadSavedState();
+        const saved = loadSavedState();
         const loader = (saved && saved.loader) || 'fabric';
 
         dom.tabBtns.forEach(b => {

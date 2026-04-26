@@ -1,0 +1,102 @@
+/*Hero */
+.home-hero {
+    padding: 48px 0 40px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.home-title {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    color: var(--text-heading);
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+}
+
+.home-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/*Card grid */
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 32px;
+    margin-bottom: 48px;
+}
+
+.tool-card {
+    flex: 1 1 280px;
+    max-width: 380px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.tool-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.card-link {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-icon {
+    color: var(--accent);
+    display: flex;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-heading);
+}
+
+.card-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    flex: 1;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.card-meta {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.card-arrow {
+    color: var(--accent);
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    display: inline-block;
+    transition: transform 0.15s;
+}
+
+.tool-card:hover .card-arrow {
+    transform: translateX(3px);
+}

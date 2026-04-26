@@ -2,7 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 	<url>
 		<loc>https://mcmodding.dev/</loc>
-		<changefreq>weekly</changefreq>
+		<changefreq>monthly</changefreq>
 		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://mcmodding.dev/events-callbacks/</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
 	</url>
 </urlset>

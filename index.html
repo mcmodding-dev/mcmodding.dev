@@ -1,23 +1,83 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1" /> 
-	<meta name="identifier-url" content="https://mcmodding.dev/" />
-	<meta name="description" content="Tools for Minecraft Modding development." />
-	<meta name="keywords" content="minecraft, modding, development, tools" />
-	<meta name="author" content="Rick South" />
-	<link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
-	<title>MC Modding</title>
-	<link rel="stylesheet" href="/assets/css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="identifier-url" content="https://mcmodding.dev/">
+	<meta name="description" content="Tools for Minecraft mod development. Browse events, callbacks, and more across Fabric, Forge, and NeoForge.">
+	<meta name="keywords" content="minecraft, modding, development, tools, fabric, forge, neoforge, events, callbacks">
+	<meta name="author" content="Rick South">
+	<link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png">
+	<title>MC Modding — Minecraft Modding Tools</title>
+	<link rel="stylesheet" href="/assets/css/global.css">
+	<link rel="stylesheet" href="/assets/css/loading.css">
+	<link rel="stylesheet" href="/assets/css/home.css">
 </head>
 <body>
-	<div class="wrapper">
-		<div class="header">
-			<h1>Tools to aid in development of Minecraft Mods!</h1>
-			<h2>Coming soon^tm :)</h2>
+
+	<div class="loadingwrapper" hidden>
+		<div class="scene" aria-hidden="true">
+			<div class="cube" role="presentation">
+				<div class="face top"></div>
+				<div class="face bottom"></div>
+				<div class="face left"></div>
+				<div class="face right"></div>
+				<div class="face front"></div>
+				<div class="face back"></div>
+			</div>
 		</div>
 	</div>
-</body>
+
+	<div class="mainwrapper" hidden>
+
+		<nav class="site-nav">
+			<div class="container nav-inner">
+				<a href="/" class="nav-brand">MC Modding</a>
+				<ul class="nav-links">
+					<li><a href="/" class="nav-link active">Home</a></li>
+					<li><a href="/events-callbacks/" class="nav-link">Events &amp; Callbacks</a></li>
+				</ul>
+				<span class="nav-meta">mcmodding.dev</span>
+			</div>
+		</nav>
+
+		<div class="page-wrapper">
+			<main class="container">
+
+				<header class="home-hero">
+					<h1 class="home-title">MC Modding</h1>
+					<p class="home-subtitle">Tools to aid in the development of Minecraft mods</p>
+				</header>
+
+				<section class="card-grid" aria-label="Tools">
+
+					<article class="tool-card">
+						<a href="/events-callbacks/" class="card-link">
+							<h2 class="card-title">Events &amp; Callbacks</h2>
+							<p class="card-desc">Browse all events and callbacks across Fabric, Forge, and NeoForge. Filter by name, view function signatures, and jump straight to the source.</p>
+							<div class="card-footer">
+								<div class="card-meta">
+									<span class="badge badge-fabric">Fabric</span>
+									<span class="badge badge-forge">Forge</span>
+									<span class="badge badge-neoforge">NeoForge</span>
+								</div>
+								<span class="card-arrow">Browse &rarr;</span>
+							</div>
+						</a>
+					</article>
+
+				</section>
+
+			</main>
+
+			<footer class="site-footer">
+				<p>mcmodding.dev &middot; Not affiliated with Mojang or Microsoft &middot; Data sourced from public repositories</p>
+			</footer>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="/assets/external/js/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="/assets/js/script.js"></script>
+</body>
 </html>

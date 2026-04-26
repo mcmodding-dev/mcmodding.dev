@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="identifier-url" content="https://mcmodding.dev/events-callbacks/">
+	<meta name="description" content="Browse all Fabric, Forge, and NeoForge events and callbacks across Minecraft versions.">
+	<meta name="keywords" content="minecraft, modding, fabric events, forge events, neoforge events, callbacks, mod development">
+	<meta name="author" content="Rick South">
+	<link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png">
+	<title>Events &amp; Callbacks — MC Modding</title>
+	<link rel="stylesheet" href="/assets/css/global.css">
+	<link rel="stylesheet" href="/assets/css/loading.css">
+	<link rel="stylesheet" href="/assets/css/events.css">
+</head>
+<body>
+
+	<div class="loadingwrapper" hidden>
+		<div class="scene" aria-hidden="true">
+			<div class="cube" role="presentation">
+				<div class="face top"></div>
+				<div class="face bottom"></div>
+				<div class="face left"></div>
+				<div class="face right"></div>
+				<div class="face front"></div>
+				<div class="face back"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mainwrapper" hidden>
+
+		<nav class="site-nav">
+			<div class="container nav-inner">
+				<a href="/" class="nav-brand">MC Modding</a>
+				<ul class="nav-links">
+					<li><a href="/" class="nav-link">Home</a></li>
+					<li><a href="/events-callbacks/" class="nav-link active">Events &amp; Callbacks</a></li>
+				</ul>
+				<span class="nav-meta">mcmodding.dev</span>
+			</div>
+		</nav>
+
+		<div class="page-wrapper">
+			<main class="container">
+
+				<header class="page-header">
+					<h1>Events &amp; Callbacks</h1>
+					<p class="page-desc">Browse all events and callbacks across Fabric, Forge, and NeoForge. Switch versions, filter by name, and jump to source.<br><br>If you come across a bug or incorrect/missing information, please open an <a href="https://github.com/mcmodding-dev/mcmodding.dev/issues" target=_blank>issue</a>. Thanks!</p>
+				</header>
+
+				<div class="events-controls">
+
+					<div class="tab-bar" role="tablist" aria-label="Modloader">
+						<button class="tab-btn active" role="tab" data-loader="fabric"   aria-selected="true">Fabric</button>
+						<button class="tab-btn"        role="tab" data-loader="forge"    aria-selected="false">Forge</button>
+						<button class="tab-btn"        role="tab" data-loader="neoforge" aria-selected="false">NeoForge</button>
+					</div>
+
+					<div class="controls-row">
+						<div class="control-group">
+							<label for="version-select" class="control-label">Version</label>
+							<select id="version-select" class="version-select" disabled>
+								<option value="">Loading&hellip;</option>
+							</select>
+						</div>
+						<div class="control-group search-group">
+							<label for="search-input" class="control-label">Filter</label>
+							<input
+								type="search"
+								id="search-input"
+								class="search-input"
+								placeholder="Search events, fields, packages"
+								autocomplete="off"
+							>
+						</div>
+						<button id="filter-reset" class="filter-reset-btn" title="Reset filter" aria-label="Reset filter" disabled></button>
+					</div>
+
+				</div>
+
+				<div class="events-status" id="events-status" aria-live="polite"></div>
+
+				<div id="events-content"></div>
+
+			</main>
+
+			<footer class="site-footer">
+				<p>mcmodding.dev &middot; Not affiliated with Mojang or Microsoft &middot; Data sourced from public repositories</p>
+			</footer>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="/assets/external/js/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="/assets/js/script.js"></script>
+	<script type="text/javascript" src="/assets/js/events.js"></script>
+</body>
+</html>

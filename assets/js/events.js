@@ -275,8 +275,12 @@
 
             const tbody = document.createElement('tbody');
 
+            let rowIndex = 0;
             events.forEach(ev => {
                 const tr = document.createElement('tr');
+                tr.classList.add(rowIndex % 2 === 0 ? 'ev-row-odd' : 'ev-row-even');
+                rowIndex++;
+
                 tr.dataset.search = [
                     moduleName,
                     ev['interface'] || '',
@@ -460,8 +464,12 @@
 
             const tbody = document.createElement('tbody');
 
+            let rowIndex = 0;
             events.forEach(ev => {
                 const tr = document.createElement('tr');
+                tr.classList.add(rowIndex % 2 === 0 ? 'ev-row-odd' : 'ev-row-even');
+                rowIndex++;
+
                 const fieldSearch = ev.fields ? ev.fields.map(f => f.name + ' ' + f.type).join(' ') : '';
                 tr.dataset.search = [packageName, ev.event || '', ev.description || '', fieldSearch].join(' ').toLowerCase();
 
@@ -562,7 +570,7 @@
                 });
                 tr.querySelector('.col-copy').appendChild(copyBtn);
             });
-            
+
             table.appendChild(tbody);
             body.appendChild(table);
             dom.content.appendChild(group);

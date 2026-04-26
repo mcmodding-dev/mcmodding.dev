@@ -323,8 +323,8 @@
     border-bottom: none;
 }
 
-.events-table tr:nth-child(even) td { background: var(--table-row-even); }
-.events-table tr:nth-child(odd)  td { background: var(--table-row-odd); }
+.events-table tr.ev-row-odd  td { background: var(--table-row-odd); }
+.events-table tr.ev-row-even td { background: var(--table-row-even); }
 .events-table tr:hover td { background: var(--table-row-hover); }
 
 .events-table tr.row-hidden {

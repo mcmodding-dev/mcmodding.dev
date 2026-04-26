@@ -11,7 +11,7 @@ function _qa(e, d) {
 	s.defer = true;
 	s.src = 'https://um.serilum.com/script.js';
 	s.setAttribute('data-website-' + 'id', '656d0358-8a94-486a-b56e-7a44ae6fd917');
-	s.setAttribute('data-do' + 'mains', 'mcmodding.dev,localhost');
+	s.setAttribute('data-do' + 'mains', 'mcmodding.dev');
 	document.head.appendChild(s);
 })();
 

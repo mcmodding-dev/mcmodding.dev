@@ -53,7 +53,7 @@ html {
 body {
     background-color: var(--bg-page);
     color: var(--text-primary);
-    font-family: var(--font-sans);
+    font-family: var(--font-sans), sans-serif;
     line-height: 1.6;
     min-height: 100vh;
 }
@@ -180,7 +180,7 @@ a {
 .badge-neoforge { background: #7a3000; color: #ffb87a; }
 
 /*Utilities */
-.text-mono { font-family: var(--font-mono); }
+.text-mono { font-family: var(--font-mono), monospace; }
 .text-secondary { color: var(--text-secondary); }
 .visually-hidden {
     position: absolute;

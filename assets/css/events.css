@@ -1,9 +1,9 @@
-/*Wider container for this page */
+/* Wider container for this page */
 .page-wrapper > .container {
     max-width: 1700px;
 }
 
-/*Page header */
+/* Page header */
 .page-header {
     padding: 40px 0 32px;
     border-bottom: 1px solid var(--border);
@@ -21,7 +21,7 @@
     font-size: 0.9rem;
 }
 
-/*Controls */
+/* Controls */
 .events-controls {
     padding: 24px 0 0;
     display: flex;
@@ -44,7 +44,7 @@
     padding: 8px 20px;
     cursor: pointer;
     font-size: 0.9rem;
-    font-family: var(--font-sans);
+    font-family: var(--font-sans), sans-serif;
     border-radius: var(--radius) var(--radius) 0 0;
     transition: background 0.15s, color 0.15s;
     margin-bottom: -2px;
@@ -94,7 +94,7 @@
     border-radius: var(--radius);
     padding: 7px 30px 7px 12px;
     font-size: 0.875rem;
-    font-family: var(--font-sans);
+    font-family: var(--font-sans), sans-serif;
     min-width: 150px;
     cursor: pointer;
     appearance: none;
@@ -113,6 +113,61 @@
 
 .search-group {
     width: 330px;
+}
+
+/* Description search toggle */
+.desc-toggle-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    margin-bottom: 8px;
+    transition: color 0.15s;
+}
+
+.desc-toggle-label:hover {
+    color: var(--text-primary);
+}
+
+.desc-toggle-label input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid var(--border-strong);
+    border-radius: 3px;
+    background: var(--bg-surface-2);
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.desc-toggle-label input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.desc-toggle-label input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: 2px solid #0d2008;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+.desc-toggle-label input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
 }
 
 .filter-reset-btn {
@@ -146,7 +201,7 @@
     border-radius: var(--radius);
     padding: 7px 12px;
     font-size: 0.875rem;
-    font-family: var(--font-sans);
+    font-family: var(--font-sans), sans-serif;
     width: 100%;
     transition: border-color 0.15s;
 }
@@ -166,7 +221,7 @@
     border-color: var(--accent);
 }
 
-/*Status bar */
+/* Status bar */
 .events-status {
     font-size: 0.82rem;
     color: var(--text-secondary);
@@ -193,7 +248,7 @@
     to { transform: rotate(360deg); }
 }
 
-/*States */
+/* States */
 .state-loading,
 .state-error,
 .state-empty {
@@ -213,7 +268,7 @@
     color: var(--text-muted);
 }
 
-/*Module groups */
+/* Module groups */
 .module-group {
     margin-top: 16px;
     border: 1px solid var(--border);
@@ -250,7 +305,7 @@
     font-weight: 600;
     color: var(--text-heading);
     font-size: 0.9rem;
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
 }
 
 .group-right {
@@ -288,7 +343,7 @@
     display: none;
 }
 
-/*Events table */
+/* Events table */
 .events-table {
     width: 100%;
     border-collapse: collapse;
@@ -336,7 +391,7 @@
 }
 
 .col-func {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
     font-size: 0.8rem;
     color: var(--text-code);
     white-space: nowrap;
@@ -437,7 +492,7 @@ tr.row-expanded td.col-pkg {
 }
 
 .ev-name {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
     font-size: 0.8rem;
     color: var(--text-code);
     word-break: normal;
@@ -592,13 +647,13 @@ tr.row-expanded .ev-field.ev-field-hidden {
 }
 
 .ev-field-type {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
     color: var(--text-secondary);
     flex-shrink: 0;
 }
 
 .ev-field-name {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
     color: var(--text-code);
 }
 
@@ -637,6 +692,10 @@ tr.row-expanded .ev-expand-icon {
 
     .search-group {
         width: 100%;
+    }
+
+    .desc-toggle-label {
+        margin-bottom: 0;
     }
 
     .tab-btn {

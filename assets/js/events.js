@@ -8,13 +8,15 @@
         activeVersion: null,
         branches: {},
         currentData: null,
+        lastRun: null,
         searchQuery: '',
+        searchDesc: false,
         loading: false
     };
 
     const dom = {};
 
-    /*Icons (Lucide — MIT) */
+    /*Icons (Lucide | MIT) */
     const ICON_CHEVRON = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
     const ICON_COPY = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>';
     const ICON_CHECK = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
@@ -87,6 +89,7 @@
         try {
             const data = loadSavedState() || {};
             data.loader = state.activeLoader;
+            data.searchDesc = state.searchDesc;
             if (!data[state.activeLoader]) data[state.activeLoader] = {};
             data[state.activeLoader].version = state.activeVersion;
             data[state.activeLoader].search = state.searchQuery;
@@ -220,7 +223,7 @@
             <span class="group-name">${escapeHtml(name)}</span>
             <span class="group-right">
                 <span class="group-count">${count} events</span>
-                <span class="group-chevron">&#9660;</span>
+                <span class="group-chevron">▼</span>
             </span>`;
         header.addEventListener('click', toggleGroup);
         header.addEventListener('keydown', e => {
@@ -289,6 +292,7 @@
                     ev.package || '',
                     ev.file || ''
                 ].join(' ').toLowerCase();
+                tr.dataset.desc = (ev.description || '').toLowerCase();
 
                 const badges = [];
                 if (ev.deprecated) {
@@ -471,7 +475,8 @@
                 rowIndex++;
 
                 const fieldSearch = ev.fields ? ev.fields.map(f => f.name + ' ' + f.type).join(' ') : '';
-                tr.dataset.search = [packageName, ev.event || '', ev.description || '', fieldSearch].join(' ').toLowerCase();
+                tr.dataset.search = [packageName, ev.event || '', fieldSearch].join(' ').toLowerCase();
+                tr.dataset.desc = (ev.description || '').toLowerCase();
 
                 const badges = [];
                 if (ev.cancellable) {
@@ -588,7 +593,9 @@
             let visible = 0;
 
             rows.forEach(tr => {
-                const match = !state.searchQuery || tr.dataset.search.includes(state.searchQuery);
+                let haystack = tr.dataset.search || '';
+                if (state.searchDesc && tr.dataset.desc) haystack += ' ' + tr.dataset.desc;
+                const match = !state.searchQuery || haystack.includes(state.searchQuery);
                 tr.classList.toggle('row-hidden', !match);
                 const descTr = tr.nextElementSibling;
                 if (descTr && descTr.classList.contains('desc-row')) {
@@ -622,14 +629,21 @@
         const json = state.currentData;
 
         let datePart = '';
-        if (json && json.lastupdated) {
-            const d = formatDate(json.lastupdated);
-            if (d) datePart = ' · Last updated: ' + d;
+        if (json) {
+            const commitDate = json.commit_date ? formatDate(json.commit_date) : '';
+            if (commitDate) datePart += ' · Commit date: ' + commitDate;
         }
+        if (state.lastRun) datePart += ' · Last checked: ' + formatDate(state.lastRun);
 
         dom.status.textContent = state.searchQuery
             ? `Showing ${visible} of ${total} events${datePart}`
             : `${total} events${datePart}`;
+    }
+
+    function updateSearchPlaceholder() {
+        dom.search.placeholder = state.searchDesc
+            ? 'Search events, fields, packages & descriptions'
+            : 'Search events, fields & packages';
     }
 
     function toggleGroup(e) {
@@ -682,6 +696,13 @@
                 }
             }, 200);
         });
+
+        dom.descToggle.addEventListener('change', () => {
+            state.searchDesc = dom.descToggle.checked;
+            updateSearchPlaceholder();
+            applyFilter(state.searchQuery);
+            saveState();
+        });
     }
 
     async function init() {
@@ -692,10 +713,19 @@
         dom.filterReset.innerHTML = ICON_RESET;
         dom.content = document.getElementById('events-content');
         dom.status = document.getElementById('events-status');
+        dom.descToggle = document.getElementById('search-desc-toggle');
+
+        const saved = loadSavedState();
+        state.searchDesc = !!(saved && saved.searchDesc);
+        dom.descToggle.checked = state.searchDesc;
+        updateSearchPlaceholder();
+
+        fetchJson(`${BASE_URL}/script/run.json`)
+            .then(d => { if (d && d.last_run) state.lastRun = d.last_run; })
+            .catch(() => {});
 
         bindEvents();
 
-        const saved = loadSavedState();
         const loader = (saved && saved.loader) || 'fabric';
 
         dom.tabBtns.forEach(b => {
